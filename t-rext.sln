@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "t-rext", "t-rext\t-rext.csproj", "{16E57CED-3453-4563-BD15-B4EDCDEE4A51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16E57CED-3453-4563-BD15-B4EDCDEE4A51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E57CED-3453-4563-BD15-B4EDCDEE4A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E57CED-3453-4563-BD15-B4EDCDEE4A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E57CED-3453-4563-BD15-B4EDCDEE4A51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
