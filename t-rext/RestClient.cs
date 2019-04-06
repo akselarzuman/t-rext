@@ -105,7 +105,7 @@ namespace t_rext
                     if (apiResponse.HttpStatusCode != HttpStatusCode.BadRequest
                         && apiResponse.HttpStatusCode != HttpStatusCode.Unauthorized
                         && !string.IsNullOrEmpty(content)
-                        && apiResponse.Headers["Content-Type"].Equals("application/json"))
+                        && apiResponse.Headers["Content-Type"].Contains("application/json"))
                     {
                         apiResponse.Model = JsonConvert.DeserializeObject<T>(content);
                     }
