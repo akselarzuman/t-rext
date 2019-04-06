@@ -14,16 +14,15 @@ namespace t_rext
     public class RestClient : IRestClient
     {
         private readonly HttpClient _client;
+        private JsonSerializerSettings _jsonSerializerSettings;
 
-        private JsonSerializerSettings _jsonSerializerSettings
-        {
-            get => _jsonSerializerSettings;
-            set => _jsonSerializerSettings = value ?? new JsonSerializerSettings();
-        }
-
-        public RestClient(HttpClient client, JsonSerializerSettings jsonSerializerSettings)
+        public RestClient(HttpClient client)
         {
             _client = client;
+        }
+
+        public void AddSerializerSettings(JsonSerializerSettings jsonSerializerSettings)
+        {
             _jsonSerializerSettings = jsonSerializerSettings;
         }
 

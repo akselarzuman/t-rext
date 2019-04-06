@@ -38,6 +38,8 @@ namespace t_rext.Core
 
         public static void AddBody(this HttpRequestMessage httpRequestMessage, object bodyParams, JsonSerializerSettings jsonSerializerSettings)
         {
+            Ensure.ArgumentNotNull(jsonSerializerSettings, nameof(jsonSerializerSettings));
+
             if (bodyParams != null)
             {
                 string request = JsonConvert.SerializeObject(bodyParams, jsonSerializerSettings);

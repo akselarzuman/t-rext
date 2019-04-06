@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using t_rext.Models;
 
 namespace t_rext.Contracts
 {
     public interface IRestClient
     {
+        void AddSerializerSettings(JsonSerializerSettings jsonSerializerSettings);
+        
         Task<ApiResponse<T>> GetAsync<T>(
             string path,
             IList<KeyValuePair<string, string>> queryParams = null,
