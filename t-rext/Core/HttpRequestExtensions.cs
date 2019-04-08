@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using Newtonsoft.Json;
+using t_rext.Models;
 
 namespace t_rext.Core
 {
@@ -55,6 +56,16 @@ namespace t_rext.Core
             if (formData != null && formData.Any())
             {
                 requestMessage.Content = new FormUrlEncodedContent(formData);
+            }
+        }
+
+        public static void AddBasicOAuth2Header(this HttpRequestMessage httpRequestMessage, OAuth2HeaderModel oAuth2HeaderModel)
+        {
+            if (oAuth2HeaderModel != null)
+            {
+                string credential = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{oAuth2HeaderModel.Key}:{oAuth2HeaderModel.Secret}"));
+
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credential);
             }
         }
     }

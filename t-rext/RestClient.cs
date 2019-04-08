@@ -31,9 +31,10 @@ namespace t_rext
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
             IList<KeyValuePair<string, string>> formData = null,
-            object bodyParams = null) where T : class, new()
+            object bodyParams = null,
+            OAuth2HeaderModel oAuth2HeaderModel = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Get, queryParams, headerParams, formData, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Get, queryParams, headerParams, formData, bodyParams, oAuth2HeaderModel);
         }
 
         public async Task<ApiResponse<T>> PostAsync<T>(
@@ -41,9 +42,10 @@ namespace t_rext
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
             IList<KeyValuePair<string, string>> formData = null,
-            object bodyParams = null) where T : class, new()
+            object bodyParams = null,
+            OAuth2HeaderModel oAuth2HeaderModel = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Post, queryParams, headerParams, formData, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Post, queryParams, headerParams, formData, bodyParams, oAuth2HeaderModel);
         }
 
         public async Task<ApiResponse<T>> DeleteAsync<T>(
@@ -51,9 +53,10 @@ namespace t_rext
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
             IList<KeyValuePair<string, string>> formData = null,
-            object bodyParams = null) where T : class, new()
+            object bodyParams = null,
+            OAuth2HeaderModel oAuth2HeaderModel = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Delete, queryParams, headerParams, formData, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Delete, queryParams, headerParams, formData, bodyParams, oAuth2HeaderModel);
         }
 
         public async Task<ApiResponse<T>> PutAsync<T>(
@@ -61,9 +64,10 @@ namespace t_rext
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
             IList<KeyValuePair<string, string>> formData = null,
-            object bodyParams = null) where T : class, new()
+            object bodyParams = null,
+            OAuth2HeaderModel oAuth2HeaderModel = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Put, queryParams, headerParams, formData, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Put, queryParams, headerParams, formData, bodyParams, oAuth2HeaderModel);
         }
 
         public async Task<ApiResponse<T>> PatchAsync<T>(
@@ -71,9 +75,10 @@ namespace t_rext
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
             IList<KeyValuePair<string, string>> formData = null,
-            object bodyParams = null) where T : class, new()
+            object bodyParams = null,
+            OAuth2HeaderModel oAuth2HeaderModel = null) where T : class, new()
         {
-            return await SendAsync<T>(path, new HttpMethod("PATCH"), queryParams, headerParams, formData, bodyParams);
+            return await SendAsync<T>(path, new HttpMethod("PATCH"), queryParams, headerParams, formData, bodyParams, oAuth2HeaderModel);
         }
 
         private async Task<ApiResponse<T>> SendAsync<T>(
@@ -82,13 +87,14 @@ namespace t_rext
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
             IList<KeyValuePair<string, string>> formData = null,
-            object bodyParams = null) where T : class, new()
+            object bodyParams = null,
+            OAuth2HeaderModel oAuth2HeaderModel = null) where T : class, new()
         {
             Ensure.ArgumentNotNullOrEmptyString(path, nameof(path));
 
             path.AddQueryParameters(queryParams);
 
-            using (HttpRequestMessage requestMessage = new HttpRequestMessage
+            using (var requestMessage = new HttpRequestMessage
             {
                 Method = httpMethod,
                 RequestUri = new Uri(path, UriKind.RelativeOrAbsolute)
@@ -97,6 +103,7 @@ namespace t_rext
                 requestMessage.AddHeaders(headerParams);
                 requestMessage.AddBody(bodyParams, _jsonSerializerSettings);
                 requestMessage.AddFormUrlEncodedContent(formData);
+                requestMessage.AddBasicOAuth2Header(oAuth2HeaderModel);
 
                 using (HttpResponseMessage httpResponseMessage = await _client.SendAsync(requestMessage).ConfigureAwait(false))
                 {
