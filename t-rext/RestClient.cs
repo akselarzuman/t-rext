@@ -30,45 +30,50 @@ namespace t_rext
             string path,
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
+            IList<KeyValuePair<string, string>> formData = null,
             object bodyParams = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Get, queryParams, headerParams, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Get, queryParams, headerParams, formData, bodyParams);
         }
 
         public async Task<ApiResponse<T>> PostAsync<T>(
             string path,
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
+            IList<KeyValuePair<string, string>> formData = null,
             object bodyParams = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Post, queryParams, headerParams, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Post, queryParams, headerParams, formData, bodyParams);
         }
 
         public async Task<ApiResponse<T>> DeleteAsync<T>(
             string path,
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
+            IList<KeyValuePair<string, string>> formData = null,
             object bodyParams = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Delete, queryParams, headerParams, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Delete, queryParams, headerParams, formData, bodyParams);
         }
 
         public async Task<ApiResponse<T>> PutAsync<T>(
             string path,
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
+            IList<KeyValuePair<string, string>> formData = null,
             object bodyParams = null) where T : class, new()
         {
-            return await SendAsync<T>(path, HttpMethod.Put, queryParams, headerParams, bodyParams);
+            return await SendAsync<T>(path, HttpMethod.Put, queryParams, headerParams, formData, bodyParams);
         }
 
         public async Task<ApiResponse<T>> PatchAsync<T>(
             string path,
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
+            IList<KeyValuePair<string, string>> formData = null,
             object bodyParams = null) where T : class, new()
         {
-            return await SendAsync<T>(path, new HttpMethod("PATCH"), queryParams, headerParams, bodyParams);
+            return await SendAsync<T>(path, new HttpMethod("PATCH"), queryParams, headerParams, formData, bodyParams);
         }
 
         private async Task<ApiResponse<T>> SendAsync<T>(
@@ -76,6 +81,7 @@ namespace t_rext
             HttpMethod httpMethod,
             IList<KeyValuePair<string, string>> queryParams = null,
             IDictionary<string, string> headerParams = null,
+            IList<KeyValuePair<string, string>> formData = null,
             object bodyParams = null) where T : class, new()
         {
             Ensure.ArgumentNotNullOrEmptyString(path, nameof(path));
@@ -90,6 +96,7 @@ namespace t_rext
             {
                 requestMessage.AddHeaders(headerParams);
                 requestMessage.AddBody(bodyParams, _jsonSerializerSettings);
+                requestMessage.AddFormUrlEncodedContent(formData);
 
                 using (HttpResponseMessage httpResponseMessage = await _client.SendAsync(requestMessage).ConfigureAwait(false))
                 {
