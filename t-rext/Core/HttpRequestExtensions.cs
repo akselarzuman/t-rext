@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using Newtonsoft.Json;
 
@@ -44,6 +47,14 @@ namespace t_rext.Core
             {
                 string request = JsonConvert.SerializeObject(bodyParams, jsonSerializerSettings);
                 httpRequestMessage.Content = new StringContent(request);
+            }
+        }
+
+        public static void AddFormUrlEncodedContent(this HttpRequestMessage requestMessage, IList<KeyValuePair<string, string>> formData)
+        {
+            if (formData != null && formData.Any())
+            {
+                requestMessage.Content = new FormUrlEncodedContent(formData);
             }
         }
     }
