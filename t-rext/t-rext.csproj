@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;net45;netstandard2.0;netstandard1.3</TargetFrameworks>
-    <Version>0.6.2</Version>
-    <Title>Armut iterable.com Client</Title>
-    <Authors>Armut Teknoloji A.Ş.</Authors>
-    <Owners>Armut Teknoloji A.Ş.</Owners>
-    <Description>armut iterable.com api .net client</Description>
+    <TargetFrameworks>net461;net45;netstandard2.0</TargetFrameworks>
+    <Version>1.0.0</Version>
+    <Title>t-rext REST Client</Title>
+    <Authors>Aksel Arzuman</Authors>
+    <Owners>Aksel Arzuman</Owners>
+    <Description>.net rest client</Description>
     <PackageProjectUrl>https://github.com/akselarzuman/t-rext</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/akselarzuman/t-rext/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/akselarzuman/t-rext</RepositoryUrl>
@@ -35,10 +35,6 @@
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <DefineConstants>$(DefineConstants);NETSTANDARD2</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
