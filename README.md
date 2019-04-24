@@ -1,5 +1,6 @@
 # t-rext
-![t-rex](https://raw.githubusercontent.com/akselarzuman/t-rext/master/misc/t-rex.jpeg)
+![t-rex](https://github.com/akselarzuman/t-rext/blob/master/misc/t-rex.jpeg)
+
 T-Rext is a lightweight rest http client
 
 ## Supported Platforms
