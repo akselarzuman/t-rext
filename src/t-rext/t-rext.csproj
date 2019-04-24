@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/akselarzuman/t-rext</RepositoryUrl>
     <Copyright>Copyright 2019 © Aksel Arzuman</Copyright>
     <PackageTags>trex, rest, dotnet, dotnet core, client library</PackageTags>
-    <AssemblyName>t_rext</AssemblyName>
+    <AssemblyName>TRext</AssemblyName>
     <RootNamespace>t_rext</RootNamespace>
 
     <!-- When compiling .NET SDK 2.0 projects targeting .NET 4.x on Mono using 'dotnet build' you -->
